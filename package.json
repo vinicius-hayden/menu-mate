@@ -1,0 +1,17 @@
+{
+  "name": "menu-mate",
+  "version": "1.0.0",
+  "description": "An alternative solution for you dine in take out!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "next dev"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

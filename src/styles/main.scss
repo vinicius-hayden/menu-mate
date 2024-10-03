@@ -1,0 +1,46 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+
+  background-color: #76A5AF;
+  color: white;
+
+  .main-middle-text {
+    margin-top: 17.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .logo-under-construction {
+      font-family: 'Calibri', 'Arial';
+      font-size: 75px;
+    }
+    .under-construction{
+      font-family: 'Calibri', 'Arial';
+    }
+    .ellipsis {
+      font-size: 150px;
+    }
+  }
+
+}
+

@@ -1,7 +1,9 @@
 /*
   1. Use a more-intuitive box-sizing model.
 */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -21,7 +23,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 
-  background-color: #76A5AF;
+  background-color: #76a5af;
   color: white;
 
   .main-middle-text {
@@ -31,16 +33,14 @@ body {
     justify-content: center;
     flex-direction: column;
     .logo-under-construction {
-      font-family: 'Calibri', 'Arial';
+      font-family: "Calibri", "Arial";
       font-size: 75px;
     }
-    .under-construction{
-      font-family: 'Calibri', 'Arial';
+    .under-construction {
+      font-family: "Calibri", "Arial";
     }
     .ellipsis {
       font-size: 150px;
     }
   }
-
 }
-

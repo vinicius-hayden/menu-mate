@@ -1,4 +1,3 @@
-import Product from "./product/Product";
-import Category from "./category/Category";
-
-export type { Product, Category };
+export * from "./constants";
+export * from "./product";
+export * from "./category";

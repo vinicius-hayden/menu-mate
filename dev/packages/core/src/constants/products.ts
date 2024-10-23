@@ -1,9 +1,8 @@
 import Product from "../product/Product";
-import { v4 as uuidv4 } from "uuid";
 
 const products: Product[] = [
   {
-    id: uuidv4(),
+    id: 1,
     name: "Oklahoma Burger",
     description: "Surprise your tastebuds with this",
     price: 12.29,
@@ -13,7 +12,7 @@ const products: Product[] = [
     categoryId: 1,
   },
   {
-    id: uuidv4(),
+    id: 2,
     name: "Mississipi Burger",
     description: "Surprise your tastebuds with this",
     price: 13.29,
@@ -23,7 +22,7 @@ const products: Product[] = [
     categoryId: 1,
   },
   {
-    id: uuidv4(),
+    id: 3,
     name: "Catupiry Chicken Pizza",
     description: "Surprise your tastebuds with this",
     price: 23.29,
@@ -33,7 +32,7 @@ const products: Product[] = [
     categoryId: 2,
   },
   {
-    id: uuidv4(),
+    id: 4,
     name: "Philadelphia Hot Roll",
     description: "Surprise your tastebuds with this",
     price: 25.29,
@@ -43,7 +42,7 @@ const products: Product[] = [
     categoryId: 3,
   },
   {
-    id: uuidv4(),
+    id: 5,
     name: "Tiramisu",
     description: "Surprise your tastebuds with this",
     price: 15.29,
@@ -52,7 +51,7 @@ const products: Product[] = [
     categoryId: 4,
   },
   {
-    id: uuidv4(),
+    id: 6,
     name: "Coca-Cola",
     description: "Surprise your tastebuds with this",
     price: 4.29,

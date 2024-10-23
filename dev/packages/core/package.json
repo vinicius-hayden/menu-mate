@@ -1,11 +1,19 @@
 {
-  "name": "core",
-  "version": "1.0.0",
-  "main": "jest.config.js",
+  "name": "@menumate/core",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup src/index.ts --dts --minify",
+    "dev": "tsup src/index.ts --dts --watch",
+    "test": "jest --watchAll --collectCoverage"
   },
+  "keywords": [],
   "author": "Vinicius Hayden",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "ts-jest": "^29.2.5",
+    "tsup": "^8.2.4"
+  }
 }

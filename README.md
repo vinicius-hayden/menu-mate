@@ -19,7 +19,7 @@ MenuMate is a simple and intuitive restaurant management system designed to stre
 
 1. Clone this repository to your local machine:
     ```bash
-    git clone https://github.com/yourusername/MenuMate.git
+    git clone https://github.com/vinicius-hayden/menu-mate.git
     ```
 
 2. Navigate to the project directory:

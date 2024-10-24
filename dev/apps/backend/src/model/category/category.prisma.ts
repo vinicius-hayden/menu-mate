@@ -24,6 +24,18 @@ export class CategoryPrisma {
     });
   }
 
+  async update(id: number, category: Category): Promise<void> {
+    await this.prisma.category.update({
+      where: { id },
+      data: {
+        name: category.name,
+        image: category.image,
+        description: category.description,
+        sortOrder: category.sortOrder,
+      },
+    });
+  }
+
   async get(): Promise<Category[]> {
     return this.prisma.category.findMany({
       include: {

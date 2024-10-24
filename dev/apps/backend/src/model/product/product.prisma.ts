@@ -1,7 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { Product } from '@menumate/core';
 import { PrismaProvider } from 'src/db/prisma.provider';
-
 @Injectable()
 export class ProductPrisma {
   constructor(readonly prisma: PrismaProvider) {}
@@ -9,8 +9,29 @@ export class ProductPrisma {
   async save(product: Product): Promise<void> {
     await this.prisma.product.upsert({
       where: { id: product.id ?? -1 },
-      update: product,
-      create: product,
+      update: {
+        name: product.name,
+        description: product.description,
+        sortOrder: product.sortOrder,
+        categoryId: product.categoryId,
+        price: product.price,
+        image: product.image,
+      },
+      create: {
+        name: product.name,
+        description: product.description,
+        sortOrder: product.sortOrder,
+        categoryId: product.categoryId,
+        price: product.price,
+        image: product.image,
+      },
+    });
+  }
+
+  async update(id: number, product: Product): Promise<void> {
+    await this.prisma.product.update({
+      where: { id },
+      data: product,
     });
   }
 

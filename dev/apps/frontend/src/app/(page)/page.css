@@ -1,0 +1,42 @@
+.cards-categories {
+  display: grid;
+  grid-template-columns: 120px 120px 120px;
+  column-gap: 22.5%;
+  row-gap: 55px;
+}
+
+@media only screen and (max-width: 1060px) {
+  .cards-categories {
+    margin-top: 75px;
+    grid-template-columns: 80px 80px 80px;
+    column-gap: 25.5%;
+    row-gap: 35px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .cards-categories {
+    margin-top: 65px;
+    grid-template-columns: 70px 70px 70px;
+    column-gap: 26.5%;
+    row-gap: 35px;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .cards-categories {
+    margin-top: 10px;
+    grid-template-columns: 60px 60px;
+    column-gap: 50%;
+    row-gap: 35px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .cards-categories {
+    margin-top: 10px;
+    grid-template-columns: 50px 50px;
+    column-gap: 50%;
+    row-gap: 35px;
+  }
+}

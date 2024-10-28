@@ -5,11 +5,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavbarCollapse, NavbarToggle } from "react-bootstrap";
 import Logo from "../shared/Logo";
-import useCategories from "@/data/hooks/useCategories";
+// import useCategories from "@/data/hooks/useCategories";
 import "./Header.css";
 
 export default function Header() {
-  const { categories } = useCategories();
+  // const { categories } = useCategories();
 
   return (
     <>

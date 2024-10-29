@@ -3,7 +3,7 @@
 import { Product } from "@menumate/core";
 import { useEffect, useState } from "react";
 
-const urlBase = "http://localhost:3000/";
+const urlBase = "http://localhost:3000";
 
 export default function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);

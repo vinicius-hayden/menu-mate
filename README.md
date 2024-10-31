@@ -39,8 +39,8 @@ MenuMate is a simple and intuitive restaurant management system designed to stre
 
 ## Tech Stack
 
-- **Frontend**: React.js
-- **Backend**: Node.js (Express)
+- **Frontend**: Next with Typescript
+- **Backend**: NestJS
 - **Database**: PostgreSQL
 - **Real-Time Updates**: WebSockets
 

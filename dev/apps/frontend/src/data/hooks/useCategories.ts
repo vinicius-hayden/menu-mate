@@ -9,7 +9,6 @@ export default function useCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   async function getCategories(): Promise<Category[]> {
     const response = await fetch(`${urlBase}/categories/`);
-    console.log(response);
     const categories = await response.json();
     return categories ?? [];
   }

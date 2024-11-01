@@ -3,7 +3,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { NavbarCollapse, NavbarToggle } from "react-bootstrap";
+import { NavbarToggle } from "react-bootstrap";
 import Logo from "../shared/Logo";
 import "./Header.css";
 import { usePathname } from "next/navigation";
@@ -14,7 +14,7 @@ export default function Header() {
   const [nextPageName, setNextPageName] = useState<string>("All Products");
   const pathname = usePathname();
 
-  function defineHrefAndNextPage(): void {    
+  function defineHrefAndNextPage(): void {
     if (currentHref != "/" && pathname === "/menu") {
       setCurrentHref("/");
       setNextPageName("All categories");
@@ -25,20 +25,20 @@ export default function Header() {
 
   return (
     <>
-      <Navbar style={{ backgroundColor: "#76a5af" }} data-bs-theme="dark">
+      <Navbar style={{ backgroundColor: "#76a5af" }} expand="lg">
         <Container className="justify-between">
           <Logo />
           <Navbar.Brand href="/" className="text-white" id="logo-text">
             MenuMate
           </Navbar.Brand>
           <NavbarToggle aria-controls="basic-navbar-nav" />
-          <NavbarCollapse id="basic-navbar-nav" className="justify-end">
-            <Nav className="ml-auto">
+          <Navbar.Collapse id="basic-navbar-nav" className="header-items">
+            <Nav className="ms-auto">
               <Nav.Link href={currentHref} className="text-white">
                 {nextPageName}
               </Nav.Link>
             </Nav>
-          </NavbarCollapse>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </>

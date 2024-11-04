@@ -15,10 +15,12 @@ export default function Page(props: PageProps) {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <div className="flex-1 flex flex-col w-screen">
+        <div className="flex-1 flex flex-col w-full"> {/* Changed w-screen to w-full */}
           {props.noHeader ? null : <Header />}
           <main
-            className={`flex-1 flex flex-col ${props.className ?? ""} ${props.noContainer ? "" : "container"} ${props.noPadding ? "" : "py-10"}`}
+            className={`flex-1 flex flex-col ${props.className ?? ""} ${
+              props.noContainer ? "" : "container"
+            } ${props.noPadding ? "" : "py-10"}`}
           >
             {props.children}
           </main>

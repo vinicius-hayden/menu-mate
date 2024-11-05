@@ -13,7 +13,7 @@ import useCategories from "@/data/hooks/useCategories";
 export default function Header() {
   const [currentHref, setCurrentHref] = useState<string>("/menu");
   const [nextPageName, setNextPageName] = useState<string>("All Products");
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false); // Sidebar open/close state
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false); 
   const expand = false;
   const pathname = usePathname();
   const { categories } = useCategories();

@@ -10,7 +10,7 @@ export default function CategoryProduct(props: CategoryItemProps) {
 
   return (
     <div key={category.id}>
-      <h1>{category.name}</h1>
+      <h1 className="text-2xl">{category.name}</h1>
       {category.products.map((product) => (
         <MenuProduct key={product.id} product={product} />
       ))}

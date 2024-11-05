@@ -1,0 +1,9 @@
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-footer-btn {
+  width: 100%;
+}

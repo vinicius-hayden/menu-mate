@@ -7,3 +7,9 @@
 .modal-footer-btn {
   width: 100%;
 }
+
+.card-img-custom{
+  height: 95px;
+  width: 115px;
+  border-radius: 5.5px;
+}

@@ -70,7 +70,7 @@ export default function Header() {
                 {isSidebarOpen
                   ? categories.map((category) => (
                       <Nav.Link
-                        href="/some-path"
+                        href={`/category/${category.id}`}
                         className="text-white"
                         key={category.name}
                       >

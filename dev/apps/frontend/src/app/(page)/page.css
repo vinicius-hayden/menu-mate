@@ -35,8 +35,14 @@
 @media only screen and (max-width: 767px) {
   .cards-categories {
     margin-top: 10px;
-    grid-template-columns: 50px 50px;
+    grid-template-columns: 20px 20px;
     column-gap: 50%;
     row-gap: 35px;
+  }
+}
+
+@media only screen and (max-width: 765px) {
+  .cards-categories {
+    grid-template-columns: 15px 15px;
   }
 }

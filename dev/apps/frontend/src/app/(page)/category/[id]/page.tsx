@@ -14,10 +14,10 @@ type pageParams = {
 
 export default function CategoryPage() {
   const [isIdAvailable, setIsIdAvailable] = useState<boolean>(false);
-  const [tabCategory, setTabCategory] = useState();
   const { id } = useParams<pageParams>();
   const { categories } = useCategories();
   const numberId: number = Number(id) - 1;
+  const [imageIdCategory, setImageIdCategory] = useState<number>(numberId);
 
   function verifyParamsAvailability(): boolean {
     const availableCategoryIds: string[] = [];
@@ -26,6 +26,33 @@ export default function CategoryPage() {
     });
     const conditionalStatement: boolean = availableCategoryIds.includes(id);
     return conditionalStatement;
+  }
+
+  function handleFunction(e: any) {
+    const entirelyNewId : string = e.target.id.replace('justify-tab-example-tab-','');
+    
+    //copying and pasting code, please remove after
+    const availableCategoryIds: string[] = [];
+    categories.forEach((category, index) => {
+      availableCategoryIds[index] = `${category.id}`;
+    });
+    const conditionalStatement: boolean = availableCategoryIds.includes(entirelyNewId);
+    //copying and pasting code, please remove after
+
+    if (conditionalStatement) {
+      console.log("aqui");
+      handleImageIdCategory(entirelyNewId);
+    } else {
+      // console.log("aqui ->", numberId);
+      // console.log(imageIdCategory);
+      // console.log("deu bo aqui ---->",categories[imageIdCategory].image);
+      // console.log("this will be the element", e.target.lastElementChild);
+      handleImageIdCategory(numberId.toString());
+    }
+  }
+
+  function handleImageIdCategory(id : string) {
+    setImageIdCategory(Number(id)-1);
   }
 
   useEffect(() => {
@@ -37,20 +64,18 @@ export default function CategoryPage() {
   if (isIdAvailable) {
     return (
       <>
-        <img src={categories[numberId].image} alt="oie" />
-        <Tabs
-          defaultActiveKey={categories[numberId].name}
+      <div className="banner-image">
+        <img src={categories[imageIdCategory].image} alt="oie" className="image-category"/>
+      </div>
+        <Tabs defaultActiveKey={categories[numberId].id}
           id="justify-tab-example"
           className="mb-3"
           justify
+          onClick={(event) => handleFunction(event)}
         >
           {categories.map((category) => {
             return (
-              <Tab
-                key={category.id}
-                eventKey={category.name}
-                title={category.name}
-              >
+              <Tab key={category.id} eventKey={category.id} title={category.name}>
                 <CategoryProduct key={category.id} category={category} />
               </Tab>
             );

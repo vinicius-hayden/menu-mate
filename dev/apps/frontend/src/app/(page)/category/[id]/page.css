@@ -1,10 +1,3 @@
-/* General Tab Container Styles */
-#justify-tab-example {
-  font-family: 'Arial', sans-serif;
-  margin-top: 20px;
-}
-
-/* Tab Navigation Styles */
 .nav-tabs {
   border: none;
   display: flex;
@@ -38,53 +31,12 @@
   font-weight: bold;
 }
 
-/* Active Tab Animation */
 .nav-link:focus {
   box-shadow: none;
   background-color: #0056b3;
 }
 
-/* Tab Content Styles */
-.tab-content {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Individual Tab Items - Products */
 .tab-pane p {
-  font-size: 14px;
-  color: #495057;
-  margin: 5px 0;
-}
-
-.tab-pane h4 {
-  margin-bottom: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #343a40;
-}
-
-/* Small Category Label Styling */
-.tab-pane h5 {
   font-size: 16px;
-  font-weight: 500;
-  color: #6c757d;
-  margin-top: 10px;
-}
-
-/* Custom Scrollbar (if needed for long lists) */
-.tab-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.tab-content::-webkit-scrollbar-thumb {
-  background-color: #007bff;
-  border-radius: 10px;
-}
-
-.tab-content::-webkit-scrollbar-track {
-  background-color: #f8f9fa;
+  color: #495057;
 }

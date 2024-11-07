@@ -3,9 +3,9 @@
 import useCategories from "@/data/hooks/useCategories";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import "./page.css"
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import "./page.css";
 import CategoryProduct from "@/components/models/Category/CategoryProduct";
 
 type pageParams = {
@@ -14,9 +14,10 @@ type pageParams = {
 
 export default function CategoryPage() {
   const [isIdAvailable, setIsIdAvailable] = useState<boolean>(false);
+  const [tabCategory, setTabCategory] = useState();
   const { id } = useParams<pageParams>();
   const { categories } = useCategories();
-  const numberId : number = (Number(id) -1);
+  const numberId: number = Number(id) - 1;
 
   function verifyParamsAvailability(): boolean {
     const availableCategoryIds: string[] = [];
@@ -36,21 +37,28 @@ export default function CategoryPage() {
   if (isIdAvailable) {
     return (
       <>
-        <Tabs defaultActiveKey="profile" id="justify-tab-example" className="mb-3" justify>
-          <Tab eventKey="home" title="Home">{categories[numberId].name}</Tab>
+        <img src={categories[numberId].image} alt="oie" />
+        <Tabs
+          defaultActiveKey={categories[numberId].name}
+          id="justify-tab-example"
+          className="mb-3"
+          justify
+        >
           {categories.map((category) => {
-            return ( 
-            <Tab key={category.id} eventKey={category.name} title={category.name}>
-              <CategoryProduct key={category.id} category={category}/>
-            </Tab>
-            )
-          })
-          }
-          
+            return (
+              <Tab
+                key={category.id}
+                eventKey={category.name}
+                title={category.name}
+              >
+                <CategoryProduct key={category.id} category={category} />
+              </Tab>
+            );
+          })}
         </Tabs>
       </>
     );
   } else {
-    return <h1>Error</h1>;
+    return <h1>Loading...</h1>;
   }
 }

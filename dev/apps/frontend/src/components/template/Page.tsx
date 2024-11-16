@@ -15,7 +15,7 @@ export default function Page(props: PageProps) {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <div className="flex-1 flex flex-col w-full"> {/* Changed w-screen to w-full */}
+        <div className="flex-1 flex flex-col w-full"> 
           {props.noHeader ? null : <Header />}
           <main
             className={`flex-1 flex flex-col ${props.className ?? ""} ${

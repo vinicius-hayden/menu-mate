@@ -41,8 +41,7 @@ export default function ProductInformation(props: ProductInformationProps) {
             className="modal-footer-btn"
             onClick={(e) => {
               e.preventDefault();
-              addItem(props.product);
-              console.log(props.product);
+              addItem(props.product)
             }}
           >
             Add 1 to Order

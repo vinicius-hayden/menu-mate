@@ -1,4 +1,3 @@
-'use client'
 import {
     ShoppingCart,
     ShoppingCartItem,
@@ -11,15 +10,15 @@ export interface ContextShoppingCartProps {
     items: ShoppingCartItem[];
     qtyItems: number;
     totalPrice: number;
-    addItem: (product: Product) => void;
-    removeItem: (product: Product) => void;
-    removeProduct: (product: Product) => void;
-    clearCart: () => void;
+    addItem: (product: Product) => void
+    removeItem: (product: Product) => void
+    removeProduct: (product: Product) => void
+    clearCart: () => void
 }
 
 const ContextShoppingCart = createContext<ContextShoppingCartProps>({} as any);
 
-export function ShoppingCartProvider({ children }: { children: React.ReactNode }) {
+export function ShoppingCartProvider(props: any) {
     const { saveItem, getItem } = useLocalStorage();
     const [shoppingCart, setShoppingCart] = useState<ShoppingCart>(new ShoppingCart());
 
@@ -39,31 +38,32 @@ export function ShoppingCartProvider({ children }: { children: React.ReactNode }
         changeShoppingCart(shoppingCart.clear());
     }
 
-    function changeShoppingCart(updatedCart: ShoppingCart) {
-        saveItem('shoppingcart', updatedCart.items);
-        setShoppingCart(updatedCart);
+    function changeShoppingCart(shoppingCart: ShoppingCart) {
+        saveItem('shoppingcart', shoppingCart.items);
+        setShoppingCart(shoppingCart);
     }
 
     useEffect(() => {
-        const savedItems: ShoppingCartItem[] = getItem('shoppingcart');
-        if (savedItems) setShoppingCart(new ShoppingCart(savedItems));
+        getItem('shoppingcart').then((savedItems: ShoppingCartItem[]) => {
+          if (savedItems) setShoppingCart(new ShoppingCart(savedItems))
+        })
     }, [getItem]);
 
     return (
         <ContextShoppingCart.Provider
             value={{
                 items: shoppingCart.items,
-                qtyItems: shoppingCart.itensQty,
-                totalPrice: shoppingCart.totalValue,
+                qtyItems: shoppingCart.qtyItems,
+                totalPrice: shoppingCart.totalPrice,
                 addItem,
                 removeItem,
                 removeProduct,
                 clearCart: clearShoppingCart,
             }}
         >
-            {children}
+            {props.children}
         </ContextShoppingCart.Provider>
     );
 }
 
-export { ContextShoppingCart };
+export default ContextShoppingCart;

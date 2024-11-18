@@ -4,14 +4,17 @@ import ShoppingCartItem from "./ShoppingCartItem"
 export default class ShoppingCart {
     constructor(readonly items: ShoppingCartItem[] = []) {}
 
-    addItem(product: Product) : ShoppingCart {
-        const item = this.itemPerProduct(product)
-        if (item) {
-            return new ShoppingCart(this.changeItemQuantity(this.items, product, 1))
-        } else {
-            return new ShoppingCart(this.changeItemQuantity(this.items, product, -1))
-        }
-    }
+    addItem(product: Product): ShoppingCart {
+      const item = this.itemPerProduct(product);
+      if (item) {
+          return new ShoppingCart(this.changeItemQuantity(this.items, product, 1));
+      } else {
+          return new ShoppingCart([
+              ...this.items,
+              { product, quantity: 1 },
+          ]);
+      }
+  }
 
     removeItem(product: Product) {
         const item = this.itemPerProduct(product)
@@ -30,11 +33,11 @@ export default class ShoppingCart {
         return new ShoppingCart()
     }
 
-    get itensQty() {
+    get qtyItems() {
         return this.items.map((item) => item.quantity).reduce((a, b) => a + b, 0);
     }
 
-    get totalValue() {
+    get totalPrice() {
         return this.items
             .map((item) => item.product.price * item.quantity)
             .reduce((a, b) => a + b, 0)

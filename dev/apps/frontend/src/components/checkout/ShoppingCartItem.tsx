@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { IconMinus, IconPlus, IconTrash } from '@tabler/icons-react'
 import { ShoppingCartItem as ShoppingCartModel } from '@menumate/core'
 

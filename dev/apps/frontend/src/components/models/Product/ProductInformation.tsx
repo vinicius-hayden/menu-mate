@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -41,7 +41,8 @@ export default function ProductInformation(props: ProductInformationProps) {
             className="modal-footer-btn"
             onClick={(e) => {
               e.preventDefault();
-              addItem(props.product)
+              console.log("Add to Order button clicked!"); 
+              addItem(props.product);
             }}
           >
             Add 1 to Order

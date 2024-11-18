@@ -23,7 +23,9 @@ export function ShoppingCartProvider(props: any) {
     const [shoppingCart, setShoppingCart] = useState<ShoppingCart>(new ShoppingCart());
 
     function addItem(product: Product) {
-        changeShoppingCart(shoppingCart.addItem(product));
+      console.debug("Attempting to add product to cart:", product); // Debug message
+      changeShoppingCart(shoppingCart.addItem(product));
+      console.debug("Updated cart items:", shoppingCart.items); // Debug message
     }
 
     function removeItem(product: Product) {
@@ -39,15 +41,18 @@ export function ShoppingCartProvider(props: any) {
     }
 
     function changeShoppingCart(shoppingCart: ShoppingCart) {
-        saveItem('shoppingcart', shoppingCart.items);
-        setShoppingCart(shoppingCart);
+      console.log("Saving cart state to localStorage:", shoppingCart.items); // Debug
+      saveItem('shoppingcart', shoppingCart.items);
+      setShoppingCart(shoppingCart);
+  
     }
 
     useEffect(() => {
-        getItem('shoppingcart').then((savedItems: ShoppingCartItem[]) => {
-          if (savedItems) setShoppingCart(new ShoppingCart(savedItems))
-        })
-    }, [getItem]);
+      const savedItems = getItem('shoppingcart');
+      if (savedItems) {
+          setShoppingCart(new ShoppingCart(savedItems));
+      }
+  }, [getItem]);
 
     return (
         <ContextShoppingCart.Provider

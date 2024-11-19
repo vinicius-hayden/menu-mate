@@ -8,12 +8,13 @@
     "dev": "next dev",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "vercel-build": "npm run build"
   },
   "author": "Vinicius Hayden",
   "license": "MIT",
   "dependencies": {
-    "next": "^13.1.6",
+    "next": "^13.5.7",
     "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

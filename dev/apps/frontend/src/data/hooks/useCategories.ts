@@ -21,7 +21,7 @@ export default function useCategories() {
 
   useEffect(() => {
     getCategories().then(setCategories);
-  });
+  }, []);
 
   return {
     categories,

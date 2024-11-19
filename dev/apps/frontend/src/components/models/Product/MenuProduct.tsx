@@ -9,8 +9,8 @@ export default function MenuProduct(props: MenuProductProps) {
   const { product } = props;
 
   return (
-    <div key={product.id}>
-      <ProductInformation product={product} / >
-    </div>
+      <div key={product.id}>
+        <ProductInformation product={product} />
+      </div>
   );
 }

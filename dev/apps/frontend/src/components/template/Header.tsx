@@ -5,18 +5,22 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Logo from "../shared/Logo";
-import "./Header.css";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import useCategories from "@/data/hooks/useCategories";
+import ShoppingCart from "../shared/ShoppingCartIcon";
+import "./Header.css";
+import useShoppingCart from "@/data/hooks/useShoppingCart";
+import Link from "next/link";
 
 export default function Header() {
   const [currentHref, setCurrentHref] = useState<string>("/menu");
   const [nextPageName, setNextPageName] = useState<string>("All Products");
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false); 
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const expand = false;
   const pathname = usePathname();
   const { categories } = useCategories();
+  const { qtyItems } = useShoppingCart();
 
   function defineHrefAndNextPage(): void {
     if (currentHref !== "/" && pathname === "/menu") {
@@ -39,6 +43,9 @@ export default function Header() {
           <Navbar.Brand href="/" className="text-white" id="logo-text">
             MenuMate
           </Navbar.Brand>
+          <Link href={"/checkout/cart"} className="cart-collapsed">
+                  <ShoppingCart qtyItems={qtyItems} />
+                </Link>
           <Navbar.Toggle
             aria-controls={`offcanvasNavbar-expand-${expand}`}
             onClick={() => handleSidebarToggle(true)}
@@ -61,6 +68,9 @@ export default function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Link href={"/checkout/cart"} className="cart-expanded">
+                  <ShoppingCart qtyItems={qtyItems}/>
+                </Link>
                 <Nav.Link href="/" className="text-white text-xl">
                   Home
                 </Nav.Link>

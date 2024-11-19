@@ -18,12 +18,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    // Increase timeout to handle slow-loading images
-    images: {
-      timeout: 10000,  // in milliseconds (10 seconds)
-    },
-  },
   sassOptions: {
     quietDeps: true, // Suppresses deprecation warnings from dependencies
   },

@@ -1,15 +1,12 @@
 // next.config.js
-
-import { webpack } from "next/dist/compiled/webpack/webpack";
-
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  webpack: (config: any) => {
-    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+  webpack: (config : any) => {
+    config.resolve.alias["@"] = path.resolve(__dirname, "src");
     return config;
-  }
-}
+  },
+};
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

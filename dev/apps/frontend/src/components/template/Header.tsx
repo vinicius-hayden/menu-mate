@@ -20,7 +20,7 @@ export default function Header() {
   const expand = false;
   const pathname = usePathname();
   const { categories } = useCategories();
-  const {qtyItems} = useShoppingCart();
+  const { qtyItems } = useShoppingCart();
 
   function defineHrefAndNextPage(): void {
     if (currentHref !== "/" && pathname === "/menu") {
@@ -43,9 +43,9 @@ export default function Header() {
           <Navbar.Brand href="/" className="text-white" id="logo-text">
             MenuMate
           </Navbar.Brand>
-          <Link href={"/checkout/cart"}>
-            <ShoppingCart qtyItems={qtyItems} />
-          </Link>
+          <Link href={"/checkout/cart"} className="cart-collapsed">
+                  <ShoppingCart qtyItems={qtyItems} />
+                </Link>
           <Navbar.Toggle
             aria-controls={`offcanvasNavbar-expand-${expand}`}
             onClick={() => handleSidebarToggle(true)}
@@ -68,6 +68,9 @@ export default function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Link href={"/checkout/cart"} className="cart-expanded">
+                  <ShoppingCart qtyItems={qtyItems}/>
+                </Link>
                 <Nav.Link href="/" className="text-white text-xl">
                   Home
                 </Nav.Link>

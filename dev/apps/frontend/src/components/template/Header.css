@@ -9,3 +9,21 @@
   justify-content: end;
   background-color: #33627b;
 }
+
+.cart-collapsed {
+  display: block;
+}
+
+.cart-expanded {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .cart-collapsed {
+    display: none;
+  }
+
+  .cart-expanded {
+    display: block;
+  }
+}

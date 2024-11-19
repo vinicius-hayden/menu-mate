@@ -25,7 +25,7 @@ export default function ShoppingCartItem(props: ShoppingCartItemProps) {
                 <span className="text-xl">{product.name}</span>
             </div>
             <div className="flex flex-col items-center gap-4">
-                <span className="text-sm ">quantity</span>
+                <span className="text-sm ">Quantity</span>
                 <div className="flex items-center border border-zinc-300 rounded-lg">
                     <button
                         disabled={quantity === 1}
@@ -45,17 +45,12 @@ export default function ShoppingCartItem(props: ShoppingCartItemProps) {
                     </button>
                 </div>
                 <button
-                    className="flex items-center gap-1 text-pink-600 select-none"
+                    className="flex items-center gap-1 text-red-600 select-none"
                     onClick={props.removeProduct}
                 >
                     <IconTrash size={20} />
-                    <span className="text-sm">Remover</span>
+                    <span className="text-sm">Remove</span>
                 </button>
-            </div>
-            <div className="flex flex-col items-end">
-                <span className="line-through text-zinc-400 text-sm">
-                    total Price: {product.price}
-                </span>
             </div>
         </div>
     )

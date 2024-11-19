@@ -9,9 +9,10 @@
     "vercel-build": "cd apps/frontend && npm run build"
   },
   "devDependencies": {
+    "@types/node": "^22.9.1",
     "prettier": "^3.2.5",
     "turbo": "^2.2.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.6.3"
   },
   "engines": {
     "node": ">=18"

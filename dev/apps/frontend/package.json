@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@menumate/core": "*",
+    "@menumate/core": "file:../../packages/core",
     "@tabler/icons-react": "^3.20.0",
     "bootstrap": "^5.3.3",
     "next": "13.5.7",

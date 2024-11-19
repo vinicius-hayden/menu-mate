@@ -21,7 +21,7 @@ export default function useProducts() {
 
   useEffect(() => {
     getProducts().then(setProducts);
-  });
+  }, []);
 
   return {
     products,

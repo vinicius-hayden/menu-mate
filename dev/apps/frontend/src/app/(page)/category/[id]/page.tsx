@@ -9,6 +9,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import "./page.css";
 import CategoryProduct from "@/components/models/Category/CategoryProduct";
+import CategoryNotFound from "@/components/models/Category/CategoryNotFound";
 
 type pageParams = {
   id: string;
@@ -86,6 +87,6 @@ export default function CategoryPage() {
       </>
     );
   } else {
-    return <h1>Loading...</h1>;
+    return <CategoryNotFound/>
   }
 }

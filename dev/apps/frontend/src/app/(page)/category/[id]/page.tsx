@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import useCategories from "@/data/hooks/useCategories";
@@ -19,74 +17,76 @@ export default function CategoryPage() {
   const [isIdAvailable, setIsIdAvailable] = useState<boolean>(false);
   const { id } = useParams<pageParams>();
   const { categories } = useCategories();
-  const numberId: number = Number(id) - 1;
-  const [imageIdCategory, setImageIdCategory] = useState<number>(numberId);
+  const initialNumberId: number = Number(id) - 1;
+  const [imageIdCategory, setImageIdCategory] = useState<number>(initialNumberId);
 
-  function verifyParamsAvailability(): boolean {
-    const availableCategoryIds: string[] = [];
-    categories.forEach((category, index) => {
-      availableCategoryIds[index] = `${category.id}`;
-    });
-    const conditionalStatement: boolean = availableCategoryIds.includes(id);
-    return conditionalStatement;
-  }
-
-  function handleFunction(e: any) {
-    const entirelyNewId : string = e.target.id.replace('justify-tab-example-tab-','');
-    
-    //copying and pasting code, please remove after
-    const availableCategoryIds: string[] = [];
-    categories.forEach((category, index) => {
-      availableCategoryIds[index] = `${category.id}`;
-    });
-    const conditionalStatement: boolean = availableCategoryIds.includes(entirelyNewId);
-    //copying and pasting code, please remove after
-
-    if (conditionalStatement) {
-      console.log("aqui");
-      handleImageIdCategory(entirelyNewId);
+  function verifyParamsAvailability(categoryId?: number): boolean {
+    const availableCategoryIds: string[] = availableCategories();
+    if (!categoryId) {
+      return availableCategoryIds.includes(id);
     } else {
-      // console.log("aqui ->", numberId);
-      // console.log(imageIdCategory);
-      // console.log("deu bo aqui ---->",categories[imageIdCategory].image);
-      // console.log("this will be the element", e.target.lastElementChild);
-      handleImageIdCategory(numberId.toString());
+      return availableCategoryIds.includes(categoryId.toString());
     }
   }
 
-  function handleImageIdCategory(id : string) {
-    setImageIdCategory(Number(id)-1);
+  function availableCategories(): string[] {
+    return categories.map((category) => `${category.id}`);
+  }
+
+  function manageImageStateCategoryAvailability(event: any) {
+    const entirelyNewId = event.target.id.replace('justify-tab-example-tab-', '');
+    const newCategoryId = Number(entirelyNewId);
+
+    if (verifyParamsAvailability(newCategoryId)) {
+      handleImageIdCategory(entirelyNewId);
+    } else {
+      console.warn("Invalid category ID:", newCategoryId);
+    }
+  }
+
+  function handleImageIdCategory(id: string) {
+    const newId = Number(id) - 1;
+    if (newId >= 0 && newId < categories.length) {
+      setImageIdCategory(newId);
+    } else {
+      console.warn("Out-of-bounds category ID:", newId);
+    }
   }
 
   useEffect(() => {
     if (verifyParamsAvailability()) {
       setIsIdAvailable(true);
+    } else {
+      setIsIdAvailable(false);
     }
   }, [categories, id]);
 
-  if (isIdAvailable) {
-    return (
-      <>
-      <div className="banner-image">
-        <img src={categories[imageIdCategory].image} alt="oie" className="image-category"/>
-      </div>
-        <Tabs defaultActiveKey={categories[numberId].id}
-          id="justify-tab-example"
-          className="mb-3"
-          justify
-          onClick={(event) => handleFunction(event)}
-        >
-          {categories.map((category) => {
-            return (
-              <Tab key={category.id} eventKey={category.id} title={category.name}>
-                <CategoryProduct key={category.id} category={category} />
-              </Tab>
-            );
-          })}
-        </Tabs>
-      </>
-    );
-  } else {
-    return <CategoryNotFound/>
+  if (!isIdAvailable || imageIdCategory < 0 || imageIdCategory >= categories.length) {
+    return <CategoryNotFound />;
   }
+
+  return (
+    <>
+      <div className="banner-image">
+        <img
+          src={categories[imageIdCategory]?.image}
+          alt={categories[imageIdCategory]?.name || "Category"}
+          className="image-category"
+        />
+      </div>
+      <Tabs
+        defaultActiveKey={categories[initialNumberId]?.id || ""}
+        id="justify-tab-example"
+        className="mb-3"
+        justify
+        onClick={(event) => manageImageStateCategoryAvailability(event)}
+      >
+        {categories.map((category) => (
+          <Tab key={category.id} eventKey={category.id} title={category.name}>
+            <CategoryProduct key={category.id} category={category} />
+          </Tab>
+        ))}
+      </Tabs>
+    </>
+  );
 }

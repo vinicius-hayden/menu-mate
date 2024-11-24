@@ -27,3 +27,68 @@
     display: block;
   }
 }
+
+.nav-tabs {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.banner-image {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.image-category {
+  width: 100%;
+  height: 300px; 
+  object-fit: cover; 
+  object-position: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .image-category {
+    height: 200px; 
+  }
+}
+
+.nav-item {
+  margin: 0 5px;
+  pointer-events: all;
+}
+
+.nav-link {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #6c757d;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.nav-link:focus {
+  box-shadow: none;
+  background-color: #0056b3;
+}
+
+.tab-pane p {
+  font-size: 16px;
+  color: #495057;
+}

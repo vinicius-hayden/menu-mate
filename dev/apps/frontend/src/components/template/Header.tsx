@@ -43,7 +43,7 @@ export default function Header() {
           <Navbar.Brand href="/" className="text-white" id="logo-text">
             MenuMate
           </Navbar.Brand>
-          <Link href={"/checkout/cart"} className="cart-collapsed">
+          <Link href={"/checkout/cart"} className="cart-collapsed ml-28">
                   <ShoppingCart qtyItems={qtyItems} />
                 </Link>
           <Navbar.Toggle

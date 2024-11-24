@@ -26,7 +26,7 @@ export default function ProductInformation(props: ProductInformationProps) {
       <ProductCard product={product} onClick={handleShow} />
       <br />
 
-      <Modal show={show} onHide={handleClose} className="mt-20">
+      <Modal show={show} onHide={handleClose} className="mt-15">
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Image src={product.image} alt="Product Image" />

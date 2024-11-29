@@ -44,10 +44,11 @@ model Product {
 model Order {
   id          Int         @id @default(autoincrement())
   status      String
+  totalPrice  Float
   subTotal    Float
   serviceFee  Float
   hstTax      Float
-  paymentType String
+  paymentType String      
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[] 
@@ -60,6 +61,7 @@ model OrderItem {
   orderId   Int
   productId Int
   price     Float
+  totalPrice Float
   quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

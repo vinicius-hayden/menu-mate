@@ -24,7 +24,7 @@ export class ProductController {
   }
 
   @Get('products/')
-  async getProduts(): Promise<Product[]> {
+  async getProducts(): Promise<Product[]> {
     return this.repo.get();
   }
 

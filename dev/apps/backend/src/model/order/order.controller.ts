@@ -13,13 +13,6 @@ import { OrderPrisma } from "./order.prisma";
 export class OrderController {
   constructor(readonly repo: OrderPrisma) {}
 
-  // @Post()
-  // async createOrder(@Body() orderDto: any) {
-  //   const { status, subTotal, serviceFee, hstTax, paymentType, orderItems } = orderDto;
-
-  //   });
-  // }
-
   @Post('post/orders')
   async saveOrder(@Body() order: Order): Promise<void> {
     return this.repo.save(order);
@@ -34,6 +27,8 @@ export class OrderController {
   async getOrder(): Promise<Order[]> {
     return this.repo.get();
   }
+
+  // @Get('orders'/)
 
   @Get('orders/:id')
   async getProductById(@Param('id') id: string): Promise<Order | null> {

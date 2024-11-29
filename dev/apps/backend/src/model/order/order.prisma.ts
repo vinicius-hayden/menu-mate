@@ -14,11 +14,73 @@ export class OrderPrisma {
       hstTax: order.hstTax,
       paymentType: order.paymentType,
       updatedAt: new Date(),
+      orderItems: {
+        create: order.orderItems.map((item) => ({
+          productId: item.productId,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      },
     };
+
     await this.prisma.order.upsert({
       where: { id: order.id ?? -1 },
       update: prismaOrder,
       create: prismaOrder,
     });
+  }
+
+  async update(id: number, order: Order): Promise<void> {
+    await this.prisma.order.update({
+      where: { id },
+      data: {
+        status: order.status,
+        subTotal: order.subTotal,
+        serviceFee: order.serviceFee,
+        hstTax: order.hstTax,
+        paymentType: order.paymentType,
+        updatedAt: new Date(),
+        orderItems: order.orderItems
+          ? {
+              upsert: order.orderItems.map((item) => ({
+                where: { id: item.id ?? -1 },
+                create: {
+                  productId: item.productId,
+                  price: item.price,
+                  quantity: item.quantity,
+                },
+                update: {
+                  productId: item.productId,
+                  price: item.price,
+                  quantity: item.quantity,
+                },
+              })),
+            }
+          : undefined,
+      },
+    });
+  }
+
+  async get(): Promise<Order[]> {
+    return this.prisma.order.findMany({
+      include: {
+        orderItems: true,
+      },
+    }) as any;
+  }
+
+  async getById(id: number): Promise<Order | null> {
+    const order = (await this.prisma.order.findUnique({
+      where: { id },
+      include: {
+        orderItems: true,
+      },
+    })) as any;
+    return (order as any) ?? null;
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.prisma.orderItem.deleteMany({ where: { orderId: id } });
+    await this.prisma.order.delete({ where: { id } });
   }
 }

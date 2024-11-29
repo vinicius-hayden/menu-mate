@@ -9,6 +9,7 @@ export class OrderPrisma {
   async save(order: Order): Promise<void> {
     const prismaOrder = {
       status: order.status,
+      totalPrice: order.totalPrice,
       subTotal: order.subTotal,
       serviceFee: order.serviceFee,
       hstTax: order.hstTax,
@@ -18,11 +19,11 @@ export class OrderPrisma {
         create: order.orderItems.map((item) => ({
           productId: item.productId,
           price: item.price,
+          totalPrice: item.price * item.quantity,
           quantity: item.quantity,
         })),
       },
     };
-
     await this.prisma.order.upsert({
       where: { id: order.id ?? -1 },
       update: prismaOrder,
@@ -35,6 +36,7 @@ export class OrderPrisma {
       where: { id },
       data: {
         status: order.status,
+        totalPrice: order.totalPrice,
         subTotal: order.subTotal,
         serviceFee: order.serviceFee,
         hstTax: order.hstTax,
@@ -47,11 +49,13 @@ export class OrderPrisma {
                 create: {
                   productId: item.productId,
                   price: item.price,
+                  totalPrice: item.price * item.quantity,
                   quantity: item.quantity,
                 },
                 update: {
                   productId: item.productId,
                   price: item.price,
+                  totalPrice: item.price * item.quantity,
                   quantity: item.quantity,
                 },
               })),

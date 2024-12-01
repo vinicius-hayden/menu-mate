@@ -80,6 +80,9 @@ export class OrderPrisma {
           equals: status,
         },
       },
+      include: {
+        orderItems: true,
+      },
     }) as any;
   }
 

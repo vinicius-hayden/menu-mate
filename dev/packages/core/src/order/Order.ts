@@ -1,4 +1,4 @@
-import orderItem from "./OrderItem";
+import OrderItem from "./OrderItem";
 
 export default interface Order {
   id: number;
@@ -8,5 +8,5 @@ export default interface Order {
   serviceFee: number;
   hstTax: number;
   paymentType: string;
-  orderItems: orderItem[];
+  orderItems: OrderItem[];
 }

@@ -1,2 +1,3 @@
 import Order from "./Order";
-export type { Order };
+import OrderItem from "./OrderItem";
+export type { Order, OrderItem };

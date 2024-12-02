@@ -73,6 +73,19 @@ export class OrderPrisma {
     }) as any;
   }
 
+  async getOrderByStatus(status: string): Promise<Order[]> {
+    return this.prisma.order.findMany({
+      where: {
+        status: {
+          equals: status,
+        },
+      },
+      include: {
+        orderItems: true,
+      },
+    }) as any;
+  }
+
   async getById(id: number): Promise<Order | null> {
     const order = (await this.prisma.order.findUnique({
       where: { id },

@@ -1,4 +1,4 @@
-export default interface orderItem {
+export default interface OrderItem {
   id: number;
   orderId: number;
   productId: number;

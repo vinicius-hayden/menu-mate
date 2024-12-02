@@ -9,7 +9,6 @@ export interface OrderProductProps {
 
 export default function OrderProduct(props: OrderProductProps) {
   const { product } = props;
-  const { updateOrderStatus } = useOrders();
 
   return (
     <div className="max-w-xs mx-auto bg-white rounded-lg shadow-sm overflow-hidden">

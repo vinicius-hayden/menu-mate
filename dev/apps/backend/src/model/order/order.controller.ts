@@ -39,7 +39,7 @@ export class OrderController {
     return this.repo.getById(+id);
   }
 
-  @Delete('product/:id')
+  @Delete('orders/:id')
   async deleteOrder(@Param('id') id: string): Promise<void> {
     return this.repo.delete(+id);
   }

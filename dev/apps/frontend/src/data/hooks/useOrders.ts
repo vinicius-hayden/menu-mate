@@ -36,6 +36,36 @@ export default function useOrders() {
     return orders ?? [];
   }
 
+  async function updateOrderStatus(orderId: number, newStatus: string) {
+    try {
+      const response = await fetch(`${urlBase}/orders/${orderId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({status: newStatus}),
+      });
+
+      if (response.ok) {
+        const updatedOrder = await response.json();
+        setOrders((prevOrders) => 
+          prevOrders.map((order) => 
+            order.id === updatedOrder.id ? updatedOrder : order
+          )
+        );
+        return updatedOrder
+      } else {
+        throw new Error('Failed to update order status');
+      }
+
+    } catch (error) {
+      console.log("Error", error)
+    };
+
+    return { orders, updateOrderStatus }
+  } 
+
+
   useEffect(() => {
     getOrders().then(setOrders);
   }, []);
@@ -45,7 +75,8 @@ export default function useOrders() {
     getPendingOrders,
     getPrepairingOrders,
     getReadyOrders,
-    getPickedUpOrders
+    getPickedUpOrders,
+    updateOrderStatus
   }
 
 }

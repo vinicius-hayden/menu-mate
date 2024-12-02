@@ -1,4 +1,3 @@
-import useOrders from "@/data/hooks/useOrders";
 import { Product } from "@menumate/core";
 import { Card } from "react-bootstrap";
 

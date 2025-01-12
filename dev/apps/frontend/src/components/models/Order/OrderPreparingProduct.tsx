@@ -5,19 +5,18 @@ import { Button } from "react-bootstrap";
 import useOrders from "@/data/hooks/useOrders";
 import Swal from 'sweetalert2'
 
-export interface OrderPrepairingProductProps {
+export interface OrderPreparingProductProps {
   order: Order;
 }
 
-export default function OrderPrepairingProduct(props: OrderPrepairingProductProps) {
+export default function OrderPreparingProduct(props: OrderPreparingProductProps) {
   const { order } = props;
   const { updateOrderStatus } = useOrders();
 
   const handleStatusChange = async (e: any) => {
     e.preventDefault();
     try {
-      const updatedOrder = await updateOrderStatus(props.order.id, "ready");
-      console.log("Order updated:", updatedOrder);
+      await updateOrderStatus(props.order.id, "ready");
 
       Swal.fire({
         icon: 'success',
@@ -45,14 +44,7 @@ export default function OrderPrepairingProduct(props: OrderPrepairingProductProp
 
   return (
     <Card key={order.id} className="shadow-lg rounded-lg p-6 bg-white">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold text-gray-800">
-          ${order.totalPrice}
-        </h1>
-        <h2 className="text-lg font-medium text-gray-600">
-          {order.paymentType}
-        </h2>
-      </div>
+     <h1 className="text-xxl font-bold text-black">#{order.id}</h1>
 
       <div className="space-y-4">
         {order.orderItems.map((orderItem) => (

@@ -1,16 +1,16 @@
 import { Order } from "@menumate/core";
 import { useEffect, useState } from "react";
 import useOrders from "@/data/hooks/useOrders";
-import OrderPrepairingProduct from "./OrderPrepairingProduct";
+import OrderPreparingProduct from "./OrderPreparingProduct";
 
-export default function PrepairingOrders() {
-  const { getPrepairingOrders } = useOrders();
+export default function PreparingOrders() {
+  const { getPreparingOrders } = useOrders();
   const [pendingOrders, setPendingOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const fetchedPendingOrders = await getPrepairingOrders();
+        const fetchedPendingOrders = await getPreparingOrders();
         setPendingOrders(fetchedPendingOrders);
       } catch (error) {
         console.error("Error fetching order", error);
@@ -26,10 +26,10 @@ export default function PrepairingOrders() {
 
   return (
     <>
-      <h1>Prepairing Orders</h1>
+      <h1>Preparing Orders</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {pendingOrders.map((pendingOrder) => (
-          <OrderPrepairingProduct key={pendingOrder.id} order={pendingOrder} />
+          <OrderPreparingProduct key={pendingOrder.id} order={pendingOrder} />
         ))}
       </div>
     </>

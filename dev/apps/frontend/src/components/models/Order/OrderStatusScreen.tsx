@@ -5,7 +5,7 @@ import useOrders from "@/data/hooks/useOrders";
 import { Order } from "@menumate/core";
 
 export default function OrderStatusScreen() {
-  const { getPrepairingOrders, getReadyOrders } = useOrders();
+  const { getPreparingOrders, getReadyOrders } = useOrders();
 
   const [preparingOrders, setPreparingOrders] = useState<Order[]>([]);
   const [readyOrders, setReadyOrders] = useState<Order[]>([]);
@@ -13,17 +13,17 @@ export default function OrderStatusScreen() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const preparing = await getPrepairingOrders();
+        const preparing = await getPreparingOrders();
         const ready = await getReadyOrders();
         setPreparingOrders(preparing);
-        setReadyOrders(ready);
+        setReadyOrders(ready); 
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
     };
 
     fetchOrders();
-  }, [getPrepairingOrders, getReadyOrders]);
+  }, [getPreparingOrders, getReadyOrders]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -32,20 +32,17 @@ export default function OrderStatusScreen() {
       <div className="grid grid-cols-2 gap-8">
         <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
-            Preparing
+            In Progress
           </h2>
-          <div className="flex gap-4 overflow-x-auto">
+          <div className="grid grid-cols-2 gap-4">
             {preparingOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-yellow-100 border border-yellow-300 p-4 rounded-lg shadow-lg text-center min-w-[200px]"
+                className="bg-yellow-200 border border-yellow-300 p-4 rounded-lg text-center"
               >
-                <h3 className="text-lg font-bold text-yellow-800">
-                  Order #{order.id}
+                <h3 className="text-6xl font-bold text-yellow-800">
+                  #{order.id}
                 </h3>
-                <p className="text-sm text-yellow-700 mt-2">
-                  Total: ${order.totalPrice.toFixed(2)}
-                </p>
               </div>
             ))}
           </div>
@@ -53,20 +50,17 @@ export default function OrderStatusScreen() {
 
         <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
-            Ready
+            Now Serving
           </h2>
-          <div className="flex gap-4 overflow-x-auto">
+          <div className="grid grid-cols-2 gap-4">
             {readyOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-green-100 border border-green-300 p-4 rounded-lg shadow-lg text-center min-w-[200px]"
+                className="bg-green-300 border border-green-300 p-4 rounded-lg text-center"
               >
-                <h3 className="text-lg font-bold text-green-800">
-                  Order #{order.id}
+                <h3 className="text-6xl font-bold text-green-900">
+                  #{order.id}
                 </h3>
-                <p className="text-sm text-green-700 mt-2">
-                  Total: ${order.totalPrice.toFixed(2)}
-                </p>
               </div>
             ))}
           </div>

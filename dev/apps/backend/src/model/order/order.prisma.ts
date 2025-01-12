@@ -1,18 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { Order } from '@menumate/core';
+import { Order, OrderItem } from '@menumate/core';
 import { PrismaProvider } from 'src/db/prisma.provider';
 
 @Injectable()
 export class OrderPrisma {
+  private serviceFee = 4.99;
+  private hstTax = 13.00;
+  
   constructor(private readonly prisma: PrismaProvider) {}
 
-  async save(order: Order): Promise<void> {
+  async create(order: Order): Promise<void> {    
+    const subTotal = this.evaluateOrderSubtotal(order.orderItems);
+    const totalPrice = this.evalOrderFinalPrice(subTotal);
+
     const prismaOrder = {
       status: order.status,
-      totalPrice: order.totalPrice,
-      subTotal: order.subTotal,
+      totalPrice: totalPrice,
+      subTotal: subTotal,
       serviceFee: order.serviceFee,
-      hstTax: order.hstTax,
+      hstTax: this.evalOrderTax(subTotal),
       paymentType: order.paymentType,
       updatedAt: new Date(),
       orderItems: {
@@ -24,11 +30,27 @@ export class OrderPrisma {
         })),
       },
     };
-    await this.prisma.order.upsert({
-      where: { id: order.id ?? -1 },
-      update: prismaOrder,
-      create: prismaOrder,
+    await this.prisma.order.create({
+      data: prismaOrder,
     });
+  }
+
+  evaluateOrderSubtotal(orderItems: OrderItem[]) : number {
+    let subTotal = 0;
+    orderItems.forEach((orderItem) => {
+      subTotal = subTotal + orderItem.price * orderItem.quantity;
+    })
+    return subTotal;
+  }
+
+  evalOrderFinalPrice(subTotal : number) : number {
+    const finalPrice = subTotal  * (1 + (this.hstTax/100)) + this.serviceFee;
+    return Number(finalPrice.toFixed(2));
+  }
+
+  evalOrderTax(subtotal: number) : number {
+    const taxPrice = subtotal * (this.hstTax/100);
+    return Number(taxPrice.toFixed(2));
   }
 
   async update(id: number, order: Order): Promise<void> {

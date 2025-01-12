@@ -59,9 +59,10 @@ export default function useOrders() {
       }
 
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.log("Error", error)
     }
+
+    return { orders, updateOrderStatus }
   } 
 
 

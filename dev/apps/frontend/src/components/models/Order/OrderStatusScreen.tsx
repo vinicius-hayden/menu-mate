@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from "react";
 import useOrders from "@/data/hooks/useOrders";
+import io from 'socket.io-client';
 import { Order } from "@menumate/core";
+
+const socket = io('http://localhost:3000'); // URL API
 
 export default function OrderStatusScreen() {
   const { getPreparingOrders, getReadyOrders } = useOrders();
@@ -21,9 +24,30 @@ export default function OrderStatusScreen() {
         console.error("Error fetching orders:", error);
       }
     };
+    fetchOrders()
 
-    fetchOrders();
-  }, [getPreparingOrders, getReadyOrders]);
+    socket.on('orderStatusUpdated', (order: Order) => {    
+      if (order.status == 'preparing') {
+        setPreparingOrders((prevPreparingOrders) => [...prevPreparingOrders, order]);
+      }
+    
+      if (order.status == 'ready') {
+        setReadyOrders((prevReadyOrders) => [...prevReadyOrders, order]);
+        setPreparingOrders((prevPreparingOrders) => (prevPreparingOrders.filter((item) => (item.id != order.id))));
+      }
+
+      if (order.status == 'pickedUp') {
+        setReadyOrders((prevReadyOrders) => {
+          return prevReadyOrders.filter((item) => (item.id != order.id));
+        })
+      }
+    });
+    
+    return () => {
+      socket.off('orderStatusUpdated');
+    };
+
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">

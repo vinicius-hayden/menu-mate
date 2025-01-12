@@ -18,8 +18,8 @@ export default function useOrders() {
     return orders ?? [];
   }
 
-  async function getPrepairingOrders(): Promise<Order[]> {
-    const response = await fetch(`${urlBase}/orders?status=prepairing`);
+  async function getPreparingOrders(): Promise<Order[]> {
+    const response = await fetch(`${urlBase}/orders?status=preparing`);
     const orders = await response.json();
     return orders ?? [];
   }
@@ -59,10 +59,9 @@ export default function useOrders() {
       }
 
     } catch (error) {
-      console.log("Error", error)
+      console.error(error);
+      throw error;
     }
-
-    return { orders, updateOrderStatus }
   } 
 
 
@@ -73,7 +72,7 @@ export default function useOrders() {
   return {
     orders,
     getPendingOrders,
-    getPrepairingOrders,
+    getPreparingOrders,
     getReadyOrders,
     getPickedUpOrders,
     updateOrderStatus

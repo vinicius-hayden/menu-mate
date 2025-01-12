@@ -17,7 +17,7 @@ export class OrderController {
 
   @Post('post/orders')
   async saveOrder(@Body() order: Order): Promise<void> {
-    return this.repo.save(order);
+    return this.repo.create(order);
   }
 
   @Put('orders/:id')

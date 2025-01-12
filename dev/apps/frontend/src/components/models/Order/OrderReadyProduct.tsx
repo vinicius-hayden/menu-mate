@@ -16,8 +16,7 @@ export default function OrderReadyProduct(props: OrderPendingProductProps) {
   const handleStatusChange = async (e: any) => {
     e.preventDefault();
     try {
-      const updatedOrder = await updateOrderStatus(props.order.id, "pickedUp");
-      console.log("Order updated:", updatedOrder);
+      await updateOrderStatus(props.order.id, "pickedUp");
 
       Swal.fire({
         icon: 'success',
@@ -45,14 +44,7 @@ export default function OrderReadyProduct(props: OrderPendingProductProps) {
 
   return (
     <Card key={order.id} className="shadow-lg rounded-lg p-6 bg-white">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-semibold text-gray-800">
-          ${order.totalPrice}
-        </h1>
-        <h2 className="text-lg font-medium text-gray-600">
-          {order.paymentType}
-        </h2>
-      </div>
+       <h1 className="text-xxl font-bold text-black">#{order.id}</h1>
 
       <div className="space-y-4">
         {order.orderItems.map((orderItem) => (

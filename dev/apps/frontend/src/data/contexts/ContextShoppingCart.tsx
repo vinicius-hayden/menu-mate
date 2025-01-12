@@ -42,10 +42,8 @@ export function ShoppingCartProvider(props: any) {
     }
 
     function changeShoppingCart(shoppingCart: ShoppingCart) {
-      console.log("Saving cart state to localStorage:", shoppingCart.items); // Debug
       saveItem('shoppingcart', shoppingCart.items);
       setShoppingCart(shoppingCart);
-  
     }
 
     useEffect(() => {

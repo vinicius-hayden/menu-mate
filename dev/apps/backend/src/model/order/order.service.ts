@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Order, OrderItem } from '@menumate/core';
 import { PrismaProvider } from 'src/db/prisma.provider';
+import { OrderGateway } from './order.gateway';
 
 @Injectable()
-export class OrderPrisma {
+export class OrderService {
   private serviceFee = 4.99;
   private hstTax = 13.00;
   
-  constructor(private readonly prisma: PrismaProvider) {}
+  constructor(private readonly prisma: PrismaProvider, private readonly orderGateway: OrderGateway) {}
 
   async create(order: Order): Promise<void> {    
     const subTotal = this.evaluateOrderSubtotal(order.orderItems);
@@ -57,34 +58,11 @@ export class OrderPrisma {
     await this.prisma.order.update({
       where: { id },
       data: {
-        status: order.status,
-        totalPrice: order.totalPrice,
-        subTotal: order.subTotal,
-        serviceFee: order.serviceFee,
-        hstTax: order.hstTax,
-        paymentType: order.paymentType,
-        updatedAt: new Date(),
-        orderItems: order.orderItems
-          ? {
-              upsert: order.orderItems.map((item) => ({
-                where: { id: item.id ?? -1 },
-                create: {
-                  productId: item.productId,
-                  price: item.price,
-                  totalPrice: item.price * item.quantity,
-                  quantity: item.quantity,
-                },
-                update: {
-                  productId: item.productId,
-                  price: item.price,
-                  totalPrice: item.price * item.quantity,
-                  quantity: item.quantity,
-                },
-              })),
-            }
-          : undefined,
+        status: order.status
       },
     });
+    const updatedOrder = await this.getById(id);
+    this.orderGateway.notifyOrderStatusUpdate(updatedOrder);
   }
 
   async get(): Promise<Order[]> {
